@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Task Manager</h1>
+<h2> Your Tasks To do </h2> <br>
+<div>
+    {% for task in tasks %}
+    {{task.title}} 
+    <a href="{% url 'tasks:done' task.id %}"><button> Done </button></a> 
+    <a href="{% url 'tasks:update' task.id %}"><button> Edit </button></a>
+    <a href="{% url 'tasks:delete' task.id %}"><button> Delete </button></a>  
+    <br>
+    {% endfor%}
+</div>
+
+
+<h2> Completed Tasks </h2> <br>
+<div>
+    {% for task in tasks_done %}
+    {{task.title}}  
+    <a href="{% url 'tasks:delete' task.id %}"><button> Delete </button></a>     
+    <a href="{% url 'tasks:done' task.id %}"><button> Not Done </button></a> 
+
+    <br>
+    {% endfor%}
+</div>
+
+
+<h2> Add Task </h2>
+<form action="{% url 'tasks:add' %}" method="POST"> 
+    {% csrf_token %}
+    <input type="text" name="task" placeholder="add a task"> 
+    <button type="submit"> ADD </button>
+</form>
+{% endblock %}

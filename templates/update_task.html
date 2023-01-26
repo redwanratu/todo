@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Previous Task: </h2>
+<h3>{{task.title}}</h3>
+
+<form action="{{task.id}}" method="POST">
+    {%  csrf_token %}
+    <input type="text" name="task">
+    <button type="submit"> Submit</button>
+    
+</form>
+{% endblock %}
